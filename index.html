@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Experiment Briefs · Aminat Oyediran</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Pre-registered experiment briefs</p>
+  <h1>Experiment Briefs</h1>
+  <p class="sub">Every brief here was generated the same way: sample size, run time and success criteria are fixed first from the funnel numbers using a two-proportion z-test, then the written brief and copy variants are produced around those numbers. Nothing is fitted after the fact.</p>
+  <p class="by">By <b>Aminat Oyediran</b> · CRO and experimentation lead</p>
+</header>
+<div class="list" id="list"><p class="empty">Loading briefs…</p></div>
+</div>
+<script>
+fetch("briefs/index.json").then(r=>r.json()).then(items=>{
+  const el=document.getElementById("list");
+  if(!items.length){el.innerHTML='<p class="empty">No briefs yet.</p>';return}
+  el.innerHTML=items.map(b=>`<a class="card" href="briefs/${b.slug}.html"><div class="t"><span class="pill ${b.status}"></span>${b.title}</div><div class="m"><span>${b.date}</span><span>${b.surface}</span><span>${b.n.toLocaleString("en-GB")} per arm · ${b.weeks} wks · MDE ${b.mde}</span></div></a>`).join("");
+}).catch(()=>{document.getElementById("list").innerHTML='<p class="empty">Could not load the index.</p>'});
+</script>
+</body>
+</html>

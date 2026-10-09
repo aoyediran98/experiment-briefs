@@ -1,0 +1,91 @@
+{
+  "title": "Quiz goal step: ranges instead of a number field",
+  "author": "Aminat Oyediran",
+  "surface": "DTC assessment quiz, paid social traffic, mobile-first, UK",
+  "hypothesis": "Because quiz starters drop off at the 'how much weight do you want to lose?' step when asked to type a precise number, replacing the open number field with four goal ranges will increase quiz completion rate, because it removes both the effort of choosing a number and the discomfort of disclosing one.",
+  "baseline_cr": 22,
+  "weekly_visitors": 18000,
+  "mde_relative": 8,
+  "arms": 2,
+  "alpha": 0.05,
+  "power": 0.8,
+  "brief": {
+    "problem": "Session recordings (n=120, Sept 2026) show 38% of quiz starters abandon at the goal step, the highest single-step drop in the flow. 14 of the 31 abandoners who were later surveyed said they 'didn't know what number to put'. Support tickets mention the step 9 times in the last month. GA4 confirms median time on this step is 2.4x the next slowest step.",
+    "priorEvidence": [
+      "June 2026: shortening the quiz from 11 to 8 steps lifted completion 6% (shipped). The goal step was kept.",
+      "No previous test on input type at this step."
+    ],
+    "control": "Current goal step: single open numeric field labelled 'How much weight do you want to lose? (kg)', Continue button disabled until a value is entered.",
+    "variants": [
+      {
+        "name": "Variant B",
+        "change": "Replace the numeric field with four tappable range cards: 'Under 5 kg', '5 to 10 kg', '10 to 20 kg', 'More than 20 kg'. Selecting a card advances automatically. Everything else on the step is unchanged.",
+        "headline": "What's your goal?",
+        "supporting": "Pick the range that feels right. You can change it later.",
+        "rationale": "Removes the precision demand and the disclosure anxiety of typing a number."
+      }
+    ],
+    "audience": "All new visitors who start the quiz from paid social landing pages, UK, any device.",
+    "excluded": "Returning visitors with an existing account, internal IPs, visitors arriving from email or retargeting, and anyone already in the pricing-page test.",
+    "entryPoint": "Assignment happens on quiz start (first step viewed), not on page load, so bounces before the quiz do not dilute the sample.",
+    "unitOfRandomisation": "User (first-party cookie ID, sticky across sessions). Session-level assignment would let one person see both versions across visits and contaminate the result.",
+    "primaryMetric": {
+      "name": "Quiz completion rate",
+      "numerator": "Users who reach the quiz results screen",
+      "denominator": "Users assigned on quiz start",
+      "attributionWindow": "Same session as assignment, plus 24 hours for returns via the resume link"
+    },
+    "secondaryMetrics": [
+      "Drop-off rate at the goal step specifically",
+      "Median time on the goal step",
+      "Checkout rate among quiz completers"
+    ],
+    "guardrails": [
+      "Checkout rate from quiz completers must not fall by more than 2% relative (the ranges must not attract less-qualified completers)",
+      "Revenue per quiz start must not fall",
+      "Quiz step load time stays under 1.5 s on mobile"
+    ],
+    "mdeRationale": "An 8% relative lift on 22% completion is about 158 extra completions a week at current traffic, which at the current completer-to-checkout rate is worth roughly £9k a month in first orders. Anything smaller would not justify the design and engineering time plus the follow-on work on the other steps.",
+    "successCriteria": "At the pre-registered end of week 2, Variant B is a win if quiz completion is at least 23.76% (8% relative on the 22% baseline) with p < 0.05 two-sided and all three guardrails hold. It is a loss if completion is significantly lower, or if the checkout guardrail is breached regardless of the completion result. Anything else is inconclusive and the test is not extended.",
+    "decisionRules": {
+      "win": "Ship range cards to 100%, then test the same pattern on the 'current weight' step, which has the second-highest drop.",
+      "loss": "Keep the number field. Next test reassurance copy under the field ('Just a rough idea is fine'), since the drop may be about disclosure rather than effort.",
+      "flat": "Conclude input type is not the driver at this step and move to the next-highest drop step instead of iterating here."
+    },
+    "baselineSource": "GA4, quiz starts to results screen, 1 Aug to 28 Sept 2026, same audience definition as the test.",
+    "trafficAllocation": "50/50 from launch. No ramp: the change is low-risk and a ramp would push the end date out.",
+    "stoppingRule": "Run the full pre-registered 2 weeks and read once at the end. No interim significance reads. The only early stop is a guardrail breach of more than 10% relative on checkout rate confirmed over 3 consecutive days, or a tracking fault.",
+    "segmentsToWatch": [
+      "iOS vs Android (the number keypad behaves differently)",
+      "New vs returning within the eligible population",
+      "Campaign type: prospecting vs retargeting"
+    ],
+    "risks": [
+      "The pricing-page test runs concurrently; eligibility excludes its participants to avoid interaction.",
+      "A new paid social campaign launches in week 2 and may shift the audience mix; both arms are exposed equally but the pooled baseline may move.",
+      "Novelty effect is unlikely for a form input but completion will be re-read 4 weeks after shipping."
+    ],
+    "qaChecks": [
+      "Assignment event fires once per user and matches the arm shown (checked on iOS Safari, Android Chrome, desktop Chrome)",
+      "Results-screen event fires for both arms and the goal value is stored in the same field for ranges and numbers",
+      "Sample ratio check at 48 hours: arms within 1% of 50/50 or the test is paused"
+    ],
+    "owners": {
+      "build": "Front-end engineer on the growth squad (design from the product designer)",
+      "analysis": "Aminat Oyediran, with the data analyst reviewing the read-out",
+      "decision": "Head of Growth, on the pre-registered criteria above"
+    }
+  },
+  "visuals": [
+    {
+      "path": "visuals/control-goal-step.png",
+      "caption": "Control: the current open number field on the goal step",
+      "placement": "control"
+    },
+    {
+      "path": "visuals/variant-b-ranges.png",
+      "caption": "Variant B: four tappable range cards replacing the field",
+      "placement": "variants"
+    }
+  ]
+}

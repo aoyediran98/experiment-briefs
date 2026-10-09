@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}} · Experiment brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="../">← All briefs</a></p>
+<header>
+  <p class="eyebrow">Pre-registered experiment brief · {{DATE}}</p>
+  <h1>{{TITLE}}</h1>
+  <p class="sub">{{SURFACE}}</p>
+  <p class="by">Author: <b>{{AUTHOR}}</b></p>
+</header>
+
+<section class="panel">
+  <p class="eyebrow">Test design</p>
+  <div class="stats">
+    <div class="stat"><div class="k">Sample per arm</div><div class="v">{{N}}</div><div class="d">units</div></div>
+    <div class="stat"><div class="k">Total sample</div><div class="v">{{TOTAL}}</div><div class="d">across {{ARMS}} arms</div></div>
+    <div class="stat"><div class="k">Run time</div><div class="v">{{WEEKS}}</div><div class="d">weeks, pre-registered</div></div>
+    <div class="stat"><div class="k">Baseline → target</div><div class="v">{{P1}} → {{P2}}</div><div class="d">+{{ABS}} pts absolute, {{MDE}} relative</div></div>
+    <div class="stat"><div class="k">Expected extra conversions</div><div class="v">+{{EXTRA}}</div><div class="d">per week if the lift is real</div></div>
+    <div class="stat"><div class="k">Smallest effect in 4 weeks</div><div class="v">{{MDE4}}</div><div class="d">relative, at {{WEEKLY}}/week</div></div>
+  </div>
+  <div class="flag {{FLAG_CLASS}}">{{FLAG}}</div>
+  <div class="formula">α={{ALPHA}} (z={{ZA}}) · power={{POWER}} (z={{ZB}}) · two-proportion z-test, two-sided</div>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">1 · The why</p>
+  <h3>Problem or opportunity</h3><p>{{PROBLEM}}</p>{{FIG_PROBLEM}}
+  <h3>Hypothesis</h3><p>{{HYPOTHESIS}}</p>
+  <h3>The decision this informs</h3>
+  <ul><li><b>Win:</b> {{WIN}}</li><li><b>Loss:</b> {{LOSS}}</li><li><b>Flat:</b> {{FLAT}}</li></ul>
+  <h3>Prior evidence</h3><ul>{{PRIOR}}</ul>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">2 · What is being tested</p>
+  <h3>Control</h3><p>{{CONTROL}}</p>{{FIG_CONTROL}}
+  <h3>Variants</h3>
+  <div class="variants">{{VARIANTS}}</div>{{FIG_VARIANTS}}
+  <h3>Audience and targeting</h3><p><b>Eligible:</b> {{AUDIENCE}}</p><p><b>Excluded:</b> {{EXCLUDED}}</p><p><b>Entry point:</b> {{ENTRY}}</p>
+  <h3>Unit of randomisation</h3><p>{{UNIT}}</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">3 · How it will be judged</p>
+  <h3>Primary metric</h3><p><b>{{PRIMARY}}</b></p>
+  <p>Numerator: {{NUMERATOR}}<br>Denominator: {{DENOMINATOR}}<br>Attribution window: {{WINDOW}}</p>
+  <h3>Pre-specified success criteria</h3><p>{{CRITERIA}}</p>
+  <h3>Secondary metrics</h3><ul>{{SECONDARY}}</ul>
+  <h3>Guardrail metrics</h3><ul>{{GUARDRAILS}}</ul>
+  <h3>Why this MDE</h3><p>{{MDE_RATIONALE}}</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">4 · Statistics and logistics</p>
+  <h3>Baseline</h3><p>{{P1}} for the primary metric. Source: {{BASELINE_SOURCE}}</p>
+  <h3>Sample size and duration</h3><p>{{N}} per arm ({{TOTAL}} total) at {{WEEKLY}} eligible units a week. Run for {{WEEKS}} full weeks at α={{ALPHA}}, power {{POWER}}. Fixed before launch.</p>
+  <h3>Traffic allocation</h3><p>{{ALLOCATION}}</p>
+  <h3>Stopping rule</h3><p>{{STOPPING}}</p>
+  <h3>Analysis plan: pre-registered segments</h3><ul>{{SEGMENTS}}</ul>{{FIG_RESULTS}}
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">5 · Risks and ownership</p>
+  <h3>Risks and dependencies</h3><ul>{{RISKS}}</ul>
+  <h3>QA and tracking checks before launch</h3><ul>{{QA}}</ul>
+  <h3>Owners and sign-off</h3>
+  <ul><li><b>Builds:</b> {{OWNER_BUILD}}</li><li><b>Analyses:</b> {{OWNER_ANALYSIS}}</li><li><b>Makes the call:</b> {{OWNER_DECISION}}</li></ul>
+</section>
+
+<details class="method">
+  <summary>How the numbers were calculated</summary>
+  <p>Sample size per arm uses the two-proportion z-test: <code>n = (z<sub>1−α/2</sub>·√(2p̄(1−p̄)) + z<sub>1−β</sub>·√(p₁(1−p₁)+p₂(1−p₂)))² / (p₂−p₁)²</code>, with p₂ = p₁·(1+MDE). Run time is total sample over weekly eligible units, rounded up, with a two-week floor. These figures were fixed before the brief was written and the brief was generated around them, so the success criteria are pre-registered rather than fitted afterwards.</p>
+</details>
+</div>
+</body>
+</html>
