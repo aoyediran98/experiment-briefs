@@ -1,5 +1,15 @@
 [
   {
+    "slug": "2026-10-09-product-page-show-estimated-shipping-cost-under-the-price",
+    "title": "Product page: show estimated shipping cost under the price",
+    "date": "2026-10-09",
+    "surface": "Product detail page, all traffic sources",
+    "weeks": 3,
+    "n": 51438,
+    "mde": "10.0%",
+    "status": "ok"
+  },
+  {
     "slug": "2026-10-09-quiz-goal-step-ranges-instead-of-a-number-field",
     "title": "Quiz goal step: ranges instead of a number field",
     "date": "2026-10-09",

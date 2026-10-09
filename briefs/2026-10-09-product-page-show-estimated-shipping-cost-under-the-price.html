@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product page: show estimated shipping cost under the price · Experiment brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="../">← All briefs</a></p>
+<header>
+  <p class="eyebrow">Pre-registered experiment brief · 09 Oct 2026</p>
+  <h1>Product page: show estimated shipping cost under the price</h1>
+  <p class="sub">Product detail page, all traffic sources</p>
+  <p class="by">Author: <b>Aminat Oyediran</b></p>
+</header>
+
+<section class="panel">
+  <p class="eyebrow">Test design</p>
+  <div class="stats">
+    <div class="stat"><div class="k">Sample per arm</div><div class="v">51,438</div><div class="d">units</div></div>
+    <div class="stat"><div class="k">Total sample</div><div class="v">102,876</div><div class="d">across 2 arms</div></div>
+    <div class="stat"><div class="k">Run time</div><div class="v">3</div><div class="d">weeks, pre-registered</div></div>
+    <div class="stat"><div class="k">Baseline → target</div><div class="v">3.10% → 3.41%</div><div class="d">+0.31 pts absolute, 10.0% relative</div></div>
+    <div class="stat"><div class="k">Expected extra conversions</div><div class="v">+62</div><div class="d">per week if the lift is real</div></div>
+    <div class="stat"><div class="k">Smallest effect in 4 weeks</div><div class="v">8.0%</div><div class="d">relative, at 40,000/week</div></div>
+  </div>
+  <div class="flag ok">Feasible in 3 week(s) of traffic; run for 3 to cover full weekly cycles. Call only at the pre-set end date.</div>
+  <div class="formula">α=0.05 (z=1.960) · power=80% (z=0.842) · two-proportion z-test, two-sided</div>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">1 · The why</p>
+  <h3>Problem or opportunity</h3><p>GA4 shows 41% of users who reach the shipping step abandon checkout. The top support theme last month was &#x27;shipping cost wasn&#x27;t shown earlier&#x27;. Today the first place a user sees any shipping cost is the shipping step, after they have already entered the checkout.</p>
+  <h3>Hypothesis</h3><p>Because 41% of users who reach the shipping step abandon checkout and the top support theme is that shipping cost was not shown earlier, showing an estimated shipping cost under the price on the product page will increase checkout completion rate, because users who continue to checkout will already have accepted the full cost and will not be surprised at the shipping step.</p>
+  <h3>The decision this informs</h3>
+  <ul><li><b>Win:</b> Ship the shipping estimate to 100% of product pages, then test showing it in the cart and on listing pages.</li><li><b>Loss:</b> Keep the product page as it is. Next test the level of the shipping cost itself (a free-shipping threshold), since seeing the cost earlier put users off rather than reassured them.</li><li><b>Flat:</b> Conclude that when the cost is shown is not the driver of shipping-step abandonment. Do not iterate on placement; investigate the shipping step itself (delivery options, speed, form friction).</li></ul>
+  <h3>Prior evidence</h3><ul><li>No previous test on shipping cost visibility is known. Confirm against the test log before launch.</li></ul>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">2 · What is being tested</p>
+  <h3>Control</h3><p>Current product page: price shown with no shipping cost or estimate. Shipping cost first appears at the shipping step of checkout.</p>
+  <h3>Variants</h3>
+  <div class="variants"><div class="variant"><div class="tag">Variant B</div><div class="why" style="margin:4px 0 6px;color:var(--fg)">Add one line directly under the price showing the estimated shipping cost for the user&#x27;s region. Nothing else on the product page or in checkout changes.</div><div class="hl">Estimated shipping: [cost for the user&#x27;s region]</div><div>Final shipping is confirmed at checkout.</div><div class="why">Moves the shipping cost to the point where the buying decision is made, so it is part of the price the user accepts rather than a surprise three steps later.</div></div></div>
+  <h3>Audience and targeting</h3><p><b>Eligible:</b> All users who view a product page, any device, any traffic source.</p><p><b>Excluded:</b> Internal IPs, and users whose shipping region cannot be estimated (they see control and are not assigned). List any concurrent checkout or pricing tests here and exclude their participants before launch.</p><p><b>Entry point:</b> Assignment happens on the first product page view, since that is where the change is shown.</p>
+  <h3>Unit of randomisation</h3><p>User (first-party ID, sticky across sessions). A purchase often spans several sessions, so session-level assignment would let one person see the product page both with and without the estimate.</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">3 · How it will be judged</p>
+  <h3>Primary metric</h3><p><b>Checkout completion rate</b></p>
+  <p>Numerator: Assigned users who complete an order<br>Denominator: Users assigned on first product page view<br>Attribution window: 7 days from assignment</p>
+  <h3>Pre-specified success criteria</h3><p>At the pre-registered end of week 3, Variant B is a win if checkout completion is at least 3.41% (10% relative on the 3.1% baseline) with p &lt; 0.05 two-sided and all three guardrails hold. It is a loss if completion is significantly lower, or if the add-to-cart or revenue guardrail is breached regardless of the completion result. Anything else is inconclusive and the test is not extended.</p>
+  <h3>Secondary metrics</h3><ul><li>Abandonment rate at the shipping step (currently 41%)</li><li>Add-to-cart rate from the product page</li><li>Share of support contacts mentioning shipping cost</li></ul>
+  <h3>Guardrail metrics</h3><ul><li>Add-to-cart rate must not fall by more than 5% relative (the estimate must not put off more users than it reassures)</li><li>Revenue per assigned user must not fall</li><li>Product page load time must not rise by more than 200 ms at the 75th percentile</li></ul>
+  <h3>Why this MDE</h3><p>A 10% relative lift on 3.1% completion is about 124 extra orders a week at full rollout on 40,000 weekly sessions. Multiply by average order value to put it in money. A smaller lift would be hard to separate from weekly noise at this traffic and would not clearly justify maintaining region-level shipping estimates on every product page.</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">4 · Statistics and logistics</p>
+  <h3>Baseline</h3><p>3.10% for the primary metric. Source: GA4, checkout completion among product page viewers, as supplied (3.1%). Date range and exact audience definition to be confirmed against the test audience before launch.</p>
+  <h3>Sample size and duration</h3><p>51,438 per arm (102,876 total) at 40,000 eligible units a week. Run for 3 full weeks at α=0.05, power 80%. Fixed before launch.</p>
+  <h3>Traffic allocation</h3><p>50/50 from launch, no ramp.</p>
+  <h3>Stopping rule</h3><p>Run the full pre-registered 3 weeks and read once at the end. No interim significance reads. The only early stop is an add-to-cart or revenue guardrail breach of more than 10% relative confirmed over 3 consecutive days, or a tracking fault.</p>
+  <h3>Analysis plan: pre-registered segments</h3><ul><li>Mobile vs desktop</li><li>New vs returning users</li><li>Shipping region or cost band (low vs high estimated shipping)</li></ul>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">5 · Risks and ownership</p>
+  <h3>Risks and dependencies</h3><ul><li>Traffic is counted in sessions but assignment is by user. Unique users will be fewer than 40,000 a week, so confirm weekly unique product page users before launch; if materially lower, the run time grows.</li><li>The estimate must match what checkout charges. A wrong estimate creates a second surprise and would bias the result against the variant.</li><li>Promotions, free-shipping offers or paid campaigns during the run change how much the shipping cost matters; record any that overlap.</li><li>Overlap with other tests on the product page or checkout; exclude their participants.</li></ul>
+  <h3>QA and tracking checks before launch</h3><ul><li>Assignment event fires once per user and matches the arm shown (checked on iOS Safari, Android Chrome, desktop Chrome)</li><li>The estimate shown equals the shipping charged at checkout for a sample of regions and basket sizes</li><li>Order event fires for both arms and joins to the assigned user ID</li><li>Sample ratio check at 48 hours: arms within 1% of 50/50 or the test is paused</li></ul>
+  <h3>Owners and sign-off</h3>
+  <ul><li><b>Builds:</b> Web squad</li><li><b>Analyses:</b> Aminat Oyediran</li><li><b>Makes the call:</b> Head of Growth, on the pre-registered criteria above</li></ul>
+</section>
+
+<details class="method">
+  <summary>How the numbers were calculated</summary>
+  <p>Sample size per arm uses the two-proportion z-test: <code>n = (z<sub>1−α/2</sub>·√(2p̄(1−p̄)) + z<sub>1−β</sub>·√(p₁(1−p₁)+p₂(1−p₂)))² / (p₂−p₁)²</code>, with p₂ = p₁·(1+MDE). Run time is total sample over weekly eligible units, rounded up, with a two-week floor. These figures were fixed before the brief was written and the brief was generated around them, so the success criteria are pre-registered rather than fitted afterwards.</p>
+</details>
+</div>
+</body>
+</html>
