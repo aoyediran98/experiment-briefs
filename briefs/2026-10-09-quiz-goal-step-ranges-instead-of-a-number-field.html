@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz goal step: ranges instead of a number field · Experiment brief</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<p class="crumb"><a href="../">← All briefs</a></p>
+<header>
+  <p class="eyebrow">Pre-registered experiment brief · 09 Oct 2026</p>
+  <h1>Quiz goal step: ranges instead of a number field</h1>
+  <p class="sub">DTC assessment quiz, paid social traffic, mobile-first, UK</p>
+  <p class="by">Author: <b>Aminat Oyediran</b></p>
+</header>
+
+<section class="panel">
+  <p class="eyebrow">Test design</p>
+  <div class="stats">
+    <div class="stat"><div class="k">Sample per arm</div><div class="v">8,941</div><div class="d">units</div></div>
+    <div class="stat"><div class="k">Total sample</div><div class="v">17,882</div><div class="d">across 2 arms</div></div>
+    <div class="stat"><div class="k">Run time</div><div class="v">2</div><div class="d">weeks, pre-registered</div></div>
+    <div class="stat"><div class="k">Baseline → target</div><div class="v">22.00% → 23.76%</div><div class="d">+1.76 pts absolute, 8.0% relative</div></div>
+    <div class="stat"><div class="k">Expected extra conversions</div><div class="v">+158</div><div class="d">per week if the lift is real</div></div>
+    <div class="stat"><div class="k">Smallest effect in 4 weeks</div><div class="v">4.0%</div><div class="d">relative, at 18,000/week</div></div>
+  </div>
+  <div class="flag ok">Feasible in 1 week(s) of traffic; run for 2 to cover full weekly cycles. Call only at the pre-set end date.</div>
+  <div class="formula">α=0.05 (z=1.960) · power=80% (z=0.842) · two-proportion z-test, two-sided</div>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">1 · The why</p>
+  <h3>Problem or opportunity</h3><p>Session recordings (n=120, Sept 2026) show 38% of quiz starters abandon at the goal step, the highest single-step drop in the flow. 14 of the 31 abandoners who were later surveyed said they &#x27;didn&#x27;t know what number to put&#x27;. Support tickets mention the step 9 times in the last month. GA4 confirms median time on this step is 2.4x the next slowest step.</p>
+  <h3>Hypothesis</h3><p>Because quiz starters drop off at the &#x27;how much weight do you want to lose?&#x27; step when asked to type a precise number, replacing the open number field with four goal ranges will increase quiz completion rate, because it removes both the effort of choosing a number and the discomfort of disclosing one.</p>
+  <h3>The decision this informs</h3>
+  <ul><li><b>Win:</b> Ship range cards to 100%, then test the same pattern on the &#x27;current weight&#x27; step, which has the second-highest drop.</li><li><b>Loss:</b> Keep the number field. Next test reassurance copy under the field (&#x27;Just a rough idea is fine&#x27;), since the drop may be about disclosure rather than effort.</li><li><b>Flat:</b> Conclude input type is not the driver at this step and move to the next-highest drop step instead of iterating here.</li></ul>
+  <h3>Prior evidence</h3><ul><li>June 2026: shortening the quiz from 11 to 8 steps lifted completion 6% (shipped). The goal step was kept.</li><li>No previous test on input type at this step.</li></ul>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">2 · What is being tested</p>
+  <h3>Control</h3><p>Current goal step: single open numeric field labelled &#x27;How much weight do you want to lose? (kg)&#x27;, Continue button disabled until a value is entered.</p><div class="figures"><figure><img src="assets/2026-10-09-quiz-goal-step-ranges-instead-of-a-number-field/control-goal-step.png" alt="Control: the current open number field on the goal step" loading="lazy"><figcaption>Control: the current open number field on the goal step</figcaption></figure></div>
+  <h3>Variants</h3>
+  <div class="variants"><div class="variant"><div class="tag">Variant B</div><div class="why" style="margin:4px 0 6px;color:var(--fg)">Replace the numeric field with four tappable range cards: &#x27;Under 5 kg&#x27;, &#x27;5 to 10 kg&#x27;, &#x27;10 to 20 kg&#x27;, &#x27;More than 20 kg&#x27;. Selecting a card advances automatically. Everything else on the step is unchanged.</div><div class="hl">What&#x27;s your goal?</div><div>Pick the range that feels right. You can change it later.</div><div class="why">Removes the precision demand and the disclosure anxiety of typing a number.</div></div></div><div class="figures"><figure><img src="assets/2026-10-09-quiz-goal-step-ranges-instead-of-a-number-field/variant-b-ranges.png" alt="Variant B: four tappable range cards replacing the field" loading="lazy"><figcaption>Variant B: four tappable range cards replacing the field</figcaption></figure></div>
+  <h3>Audience and targeting</h3><p><b>Eligible:</b> All new visitors who start the quiz from paid social landing pages, UK, any device.</p><p><b>Excluded:</b> Returning visitors with an existing account, internal IPs, visitors arriving from email or retargeting, and anyone already in the pricing-page test.</p><p><b>Entry point:</b> Assignment happens on quiz start (first step viewed), not on page load, so bounces before the quiz do not dilute the sample.</p>
+  <h3>Unit of randomisation</h3><p>User (first-party cookie ID, sticky across sessions). Session-level assignment would let one person see both versions across visits and contaminate the result.</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">3 · How it will be judged</p>
+  <h3>Primary metric</h3><p><b>Quiz completion rate</b></p>
+  <p>Numerator: Users who reach the quiz results screen<br>Denominator: Users assigned on quiz start<br>Attribution window: Same session as assignment, plus 24 hours for returns via the resume link</p>
+  <h3>Pre-specified success criteria</h3><p>At the pre-registered end of week 2, Variant B is a win if quiz completion is at least 23.76% (8% relative on the 22% baseline) with p &lt; 0.05 two-sided and all three guardrails hold. It is a loss if completion is significantly lower, or if the checkout guardrail is breached regardless of the completion result. Anything else is inconclusive and the test is not extended.</p>
+  <h3>Secondary metrics</h3><ul><li>Drop-off rate at the goal step specifically</li><li>Median time on the goal step</li><li>Checkout rate among quiz completers</li></ul>
+  <h3>Guardrail metrics</h3><ul><li>Checkout rate from quiz completers must not fall by more than 2% relative (the ranges must not attract less-qualified completers)</li><li>Revenue per quiz start must not fall</li><li>Quiz step load time stays under 1.5 s on mobile</li></ul>
+  <h3>Why this MDE</h3><p>An 8% relative lift on 22% completion is about 158 extra completions a week at current traffic, which at the current completer-to-checkout rate is worth roughly £9k a month in first orders. Anything smaller would not justify the design and engineering time plus the follow-on work on the other steps.</p>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">4 · Statistics and logistics</p>
+  <h3>Baseline</h3><p>22.00% for the primary metric. Source: GA4, quiz starts to results screen, 1 Aug to 28 Sept 2026, same audience definition as the test.</p>
+  <h3>Sample size and duration</h3><p>8,941 per arm (17,882 total) at 18,000 eligible units a week. Run for 2 full weeks at α=0.05, power 80%. Fixed before launch.</p>
+  <h3>Traffic allocation</h3><p>50/50 from launch. No ramp: the change is low-risk and a ramp would push the end date out.</p>
+  <h3>Stopping rule</h3><p>Run the full pre-registered 2 weeks and read once at the end. No interim significance reads. The only early stop is a guardrail breach of more than 10% relative on checkout rate confirmed over 3 consecutive days, or a tracking fault.</p>
+  <h3>Analysis plan: pre-registered segments</h3><ul><li>iOS vs Android (the number keypad behaves differently)</li><li>New vs returning within the eligible population</li><li>Campaign type: prospecting vs retargeting</li></ul>
+</section>
+
+<section class="panel brief">
+  <p class="eyebrow">5 · Risks and ownership</p>
+  <h3>Risks and dependencies</h3><ul><li>The pricing-page test runs concurrently; eligibility excludes its participants to avoid interaction.</li><li>A new paid social campaign launches in week 2 and may shift the audience mix; both arms are exposed equally but the pooled baseline may move.</li><li>Novelty effect is unlikely for a form input but completion will be re-read 4 weeks after shipping.</li></ul>
+  <h3>QA and tracking checks before launch</h3><ul><li>Assignment event fires once per user and matches the arm shown (checked on iOS Safari, Android Chrome, desktop Chrome)</li><li>Results-screen event fires for both arms and the goal value is stored in the same field for ranges and numbers</li><li>Sample ratio check at 48 hours: arms within 1% of 50/50 or the test is paused</li></ul>
+  <h3>Owners and sign-off</h3>
+  <ul><li><b>Builds:</b> Front-end engineer on the growth squad (design from the product designer)</li><li><b>Analyses:</b> Aminat Oyediran, with the data analyst reviewing the read-out</li><li><b>Makes the call:</b> Head of Growth, on the pre-registered criteria above</li></ul>
+</section>
+
+<details class="method">
+  <summary>How the numbers were calculated</summary>
+  <p>Sample size per arm uses the two-proportion z-test: <code>n = (z<sub>1−α/2</sub>·√(2p̄(1−p̄)) + z<sub>1−β</sub>·√(p₁(1−p₁)+p₂(1−p₂)))² / (p₂−p₁)²</code>, with p₂ = p₁·(1+MDE). Run time is total sample over weekly eligible units, rounded up, with a two-week floor. These figures were fixed before the brief was written and the brief was generated around them, so the success criteria are pre-registered rather than fitted afterwards.</p>
+</details>
+</div>
+</body>
+</html>
